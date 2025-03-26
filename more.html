@@ -1,0 +1,219 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container
+        {
+            display: flex;
+            
+            
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        .item
+        {
+            width: 70vh;
+        }
+        img
+        {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+   <script>
+  let urlSearchParams=  new URLSearchParams(location.search)//?id=2
+  let id=urlSearchParams.get("id") //2
+ let products= JSON.parse(localStorage.getItem("products"))
+ let filteredData=products.filter(obj=>obj.id==id)
+  function displayData(products)
+{
+    let container=document.getElementById("container")
+    container.innerHTML=``
+    products.forEach(({ id, title, brand, category, description, price, rating, images }) =>
+    {
+        let item=document.createElement("div")
+        item.className="item"
+       
+        item.innerHTML=`
+        <img src="${images[0]}">
+        <p>Title: ${title}  Price:${price}</p>
+        <p>Brand : ${(brand!=undefined) ? brand : "Not Available"}</p>
+        <p>Category: ${category}</p>
+        <p class="description">Description: ${description}</p>
+        
+           
+        `
+        container.appendChild(item)
+    }
+    )
+}
+displayData(filteredData)
+   </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e2e2e2, #f4f4f4);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #007BFF, #00c6ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            margin-top: 10px;
+            display: inline-block;
+            font-size: 1.1em;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content section */
+        main {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Product details container */
+        #product-details {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image styling */
+        #product-details img {
+            max-width: 100%;
+            height: 350px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Title styling */
+        h2 {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.5em;
+            }
+
+            #product-details {
+                padding: 20px;
+            }
+
+            #product-details img {
+                height: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <main>
+        <div id="product-details">
+            <!-- Product details will be populated here by JS -->
+        </div>
+    </main>
+
+    <script>
+        // Get the product ID from the URL
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const productId = urlSearchParams.get("id");
+
+        // Fetch product data from localStorage and display the details
+        function getProductData() {
+            const products = JSON.parse(localStorage.getItem("products"));
+            const product = products.find(item => item.id == productId);
+            displayProductDetails(product);
+        }
+
+        // Display the product details
+        function displayProductDetails(product) {
+            const productDetailsContainer = document.getElementById("product-details");
+
+            if (product) {
+                productDetailsContainer.innerHTML = `
+                    <img src="${product.images[0]}" alt="${product.title}">
+                    <h2>${product.title}</h2>
+                    <p><strong>Price:</strong> $${product.price}</p>
+                    <p><strong>Brand:</strong> ${product.brand || 'Not Available'}</p>
+                    <p><strong>Category:</strong> ${product.category}</p>
+                    <p><strong>Description:</strong> ${product.description}</p>
+                    <p><strong>Rating:</strong> ${product.rating} stars</p>
+                    <button onclick="window.history.back()">Go Back</button>
+                `;
+            } else {
+                productDetailsContainer.innerHTML = `<p>Product not found.</p>`;
+            }
+        }
+
+        // Load product details on page load
+        getProductData();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,148 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container
+        {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(350px,1fr));
+            gap:10px;
+            padding: 10px;
+            
+        }
+        img
+        {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+        }
+        .description
+        {
+            overflow: hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis
+        }
+        .item
+        {
+            padding: 10px;
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f4f4f4, #e2e2e2);
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #007BFF, #00c6ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        /* Grid container for responsive layout */
+        #container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Product card styling */
+        .item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Image styling */
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* Product description (ellipsis for overflow) */
+        .description {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Title and price styling */
+        h2 {
+            font-size: 1.3em;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        /* Responsive layout adjustments */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.5em;
+            }
+
+            .item {
+                padding: 15px;
+            }
+
+            img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div id="container">
+        <!-- Product items will be populated by JavaScript -->
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>
