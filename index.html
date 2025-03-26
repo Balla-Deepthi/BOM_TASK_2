@@ -120,6 +120,22 @@
             margin: 5px 0;
         }
 
+        /* Loader styling */
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #007BFF;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 50px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive layout adjustments */
         @media (max-width: 768px) {
             header {
@@ -137,12 +153,60 @@
     </style>
 </head>
 <body>
-    
+   
+
+    <!-- Loader shown while the products are being fetched -->
+    <div class="loader" id="loader"></div>
 
     <div id="container">
         <!-- Product items will be populated by JavaScript -->
     </div>
 
-    <script src="./index.js"></script>
+    <script>
+        async function getData() {
+            try {
+                let response = await fetch("https://dummyjson.com/products");
+                if (!response.ok) {
+                    throw new Error("HTTP Error: ", response.status);
+                }
+                let result = await response.json();
+                localStorage.setItem("products", JSON.stringify(result.products));
+                displayData(result.products);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        async function displayData(products) {
+            let container = document.getElementById("container");
+            let loader = document.getElementById("loader");
+            loader.style.display = "none"; // Hide loader once data is fetched
+
+            container.innerHTML = ``;
+            products.forEach(obj => {
+                let item = document.createElement("div");
+                item.className = "item";
+                let { title, id, category, images, price, description, brand } = obj;
+
+                item.innerHTML = `
+                    <img src="${images[0]}">
+                    <h2>${title}</h2>
+                    <p>Price: $${price}</p>
+                    <p>Brand: ${brand || "Not Available"}</p>
+                    <p>Category: ${category}</p>
+                    <p class="description">Description: ${description}</p>
+                    <button style="padding: 5px" onclick="getMoreData(${id})">See More</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function getMoreData(id) {
+            window.location.href = `./more.html?id=${id}`;
+        }
+
+        // Initialize the data fetching process
+        getData();
+    </script>
 </body>
 </html>
